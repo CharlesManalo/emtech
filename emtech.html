@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Chronicle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            border-bottom: 4px double #000;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .masthead {
+            font-family: 'Old English Text MT', 'Blackletter', serif;
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .metadata {
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+            margin-top: 10px;
+        }
+
+        .content-wrapper {
+            padding: 30px;
+        }
+
+        .main-story {
+            border-bottom: 2px solid #000;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+
+        .headline {
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .subheadline {
+            font-size: 20px;
+            color: #444;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .byline {
+            font-size: 12px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin: 20px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .caption {
+            font-size: 12px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .article-text {
+            columns: 2;
+            column-gap: 30px;
+            font-size: 16px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .article-text p {
+            margin-bottom: 15px;
+        }
+
+        .drop-cap {
+            float: left;
+            font-size: 75px;
+            line-height: 60px;
+            padding-right: 8px;
+            font-weight: bold;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+
+        .story {
+            border-left: 3px solid #000;
+            padding-left: 15px;
+        }
+
+        .story-headline {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .story-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin: 10px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .review-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+
+        .review-article {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #000;
+            margin-bottom: 30px;
+        }
+
+        .review-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .rating-text {
+            color: #666;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .review-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .review-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .review-content p {
+            margin-bottom: 15px;
+        }
+
+        .review-content strong {
+            color: #000;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .article-text {
+                columns: 1;
+            }
+
+            .three-column {
+                grid-template-columns: 1fr;
+            }
+
+            .masthead {
+                font-size: 48px;
+            }
+
+            .review-article {
+                padding: 20px;
+            }
+
+            .review-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="newspaper">
+        <div class="header">
+            <div class="masthead">The Daily Dose of Portugal</div>
+            <div class="tagline">"All the News Worth Reading"</div>
+            <div class="metadata">
+                Wednesday, January 21, 2026 | Volume CLXXV, No. 60,234 | ₱3.50
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="main-story">
+                <div class="headline">Technology Empowers Student Collaboration in Modern Classrooms</div>
+                <div class="subheadline">New educational initiatives bring digital storytelling and collaborative
+                    learning to the forefront</div>
+                <div class="byline">By Elhyza Manalo | Education Reporter</div>
+
+                <img src="images/9d2ba001-0ec2-42fe-a336-fd270c5309b1.jpg"
+                    alt="Students working together on digital project" class="article-image">
+                <div class="caption">Students collaborate on a digital newsletter project using modern empowerment
+                    technologies in their classroom.</div>
+
+                <div class="article-text">
+                    <p><span class="drop-cap">I</span>n classrooms across the nation, a quiet revolution is taking
+                        place. Students are no longer passive recipients of information but active creators of content,
+                        working together to build stories that matter to their communities. The BlogCraft initiative
+                        represents a new wave of educational empowerment technologies that are transforming how young
+                        people learn to communicate and collaborate.</p>
+
+                    <p>The project divides students into small groups of three to five members, each tasked with
+                        creating a collaborative newsletter or blog. This hands-on approach teaches not just technical
+                        skills, but the essential soft skills of teamwork, communication, and creative problem-solving
+                        that will serve students throughout their lives.</p>
+
+                    <p>Educators report that the collaborative nature of these projects helps students develop a deeper
+                        understanding of audience, purpose, and effective communication. By choosing their own themes
+                        and intended audiences, students take ownership of their work in ways that traditional
+                        assignments rarely achieve.</p>
+
+                    <p>The visual and design elements of the projects add another layer of learning. Students must
+                        consider layout, typography, color schemes, and the strategic use of images and multimedia to
+                        enhance their message. These are skills that extend far beyond the classroom, preparing students
+                        for a world where digital literacy is increasingly essential.</p>
+
+                    <p>Perhaps most importantly, the reflective component of the activity encourages metacognition.
+                        Students don't just complete the work—they think critically about their process, their
+                        collaboration, and what they've learned along the way.</p>
+                </div>
+            </div>
+
+            <div class="section-header">Related Stories</div>
+
+            <div class="three-column">
+                <div class="story">
+                    <div class="story-headline">Digital Literacy Becomes Core Curriculum</div>
+                    <img src="images/0d1d3037-a67d-4aeb-b0cf-5df7d0ce6b8c.jpg"
+                        alt="Digital literacy curriculum integration" class="story-image">
+                    <div class="story-text">
+                        <p>Schools nationwide are integrating digital communication skills into their core curriculum,
+                            recognizing that the ability to create and curate online content is no longer optional but
+                            essential for success in the modern world.</p>
+                    </div>
+                </div>
+
+                <div class="story">
+                    <div class="story-headline">The Power of Peer Learning</div>
+                    <img src="images/170c8dce-172c-4d53-88c3-f59ae8e3d68c.jpg"
+                        alt="Students collaborating in peer learning" class="story-image">
+                    <div class="story-text">
+                        <p>Research continues to show that collaborative learning environments produce better outcomes
+                            than traditional lecture-based instruction. Students working in small groups demonstrate
+                            improved critical thinking and communication skills.</p>
+                    </div>
+                </div>
+
+                <div class="story">
+                    <div class="story-headline">From Classroom to Career</div>
+                    <img src="images/4b3dd4d6-ab94-4ef8-a93f-0da2c60b2161.jpg"
+                        alt="Transitioning from classroom to career" class="story-image">
+                    <div class="story-text">
+                        <p>Employers increasingly seek candidates who can work effectively in teams and communicate
+                            clearly across multiple platforms. Educational initiatives like BlogCraft help bridge the
+                            gap between academic learning and professional expectations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header">Review & Insights</div>
+
+            <div class="review-section">
+                <div class="review-article">
+                    <div class="review-title">Educational Technology: A Critical Review</div>
+                    <div class="review-rating">
+                        <span class="stars">★★★★½</span>
+                        <span class="rating-text">4.5/5 Stars</span>
+                    </div>
+                    <div class="review-meta">By Academic Reviewer | Technology Education Specialist</div>
+
+                    <div class="review-content">
+                        <p>As we reflect on the integration of technology in modern education, several key insights
+                            emerge from our collaborative project experience. The BlogCraft initiative represents a
+                            paradigm shift in how students engage with learning content and develop essential digital
+                            competencies.</p>
+
+                        <p><strong>Strengths:</strong> The collaborative nature of the project fosters genuine teamwork
+                            and communication skills that extend far beyond traditional classroom activities. Students
+                            demonstrate remarkable creativity when given ownership of their learning process.</p>
+
+                        <p><strong>Areas for Growth:</strong> While the technical aspects of the project are
+                            well-executed, we recognize that equitable access to technology remains a critical
+                            consideration. The digital divide can inadvertently create barriers for some students.</p>
+
+                        <p><strong>Future Implications:</strong> This experience has illuminated the transformative
+                            potential of technology-enhanced learning. Moving forward, we must ensure that digital
+                            literacy initiatives are inclusive, accessible, and continuously adapted to meet evolving
+                            educational needs.</p>
+
+                        <p><strong>Personal Reflection:</strong> Participating in this project has reinforced our belief
+                            that education thrives when it embraces innovation while maintaining its core values of
+                            equity and human connection. The future of education lies in thoughtfully integrating
+                            technology with proven pedagogical principles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
